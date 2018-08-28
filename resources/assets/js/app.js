@@ -15,7 +15,9 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('compra-menor', require('./components/CompraMenor.vue'));
+Vue.component('crear-compra-menor', require('./components/CrearCompraMenor.vue'));
+Vue.component('cotizar-compra-menor', require('./components/CotizarCompraMenor.vue'));
 
 const app = new Vue({
     el: '#app'

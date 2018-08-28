@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 offset-md-2">
         <h3>Agregar Usuario a {{$dependencia->nombre}}</h3>
         {!! Form::open(['url' => 'usuarios_dependecia/' . $dependencia->id]) !!}
             @include('usuarios.dependencia_form', ['submitButtonText' => 'Guardar'])

@@ -5,10 +5,32 @@ use App\Procedimiento;
 use App\Proveedor;
 use App\Services\ExcelGenerator;
 use App\Services\NumerosLetras;
+use App\Exports\RequisicionExport;
+
+Route::get('/test', function(){
+    Excel::load('public/sanmartin/excel/proveedores.xlsx', function($reader) {
+        // Loop through all sheets
+        $reader->each(function($sheet) {
+            Proveedor::create([
+                'nombre' => $sheet['nombre'],
+                'representante' => $sheet['responsable'],
+                'telefono' => $sheet['telefono'],
+                'email' => $sheet['correo'],
+                'status' => 1,
+                'actividad' => $sheet['servicio']
+            ]);
+        });
+    });
+});
 
 Route::get('/', ['middleware' => 'auth', function () {
     return redirect('/home');
 }]);
+
+Route::get('/auth/login', function () {
+    return redirect('/login');
+});
+
 
 Route::get('/ganadores', function () {
     $proveedores = Proveedor::all();
@@ -44,11 +66,29 @@ Route::get('/home', function () {
 //Analistas routes
 Route::get('/analista', 'ProcedimientosAnalistaController@index');
 Route::get('/analista/{procedimiento_id}', 'ProcedimientosAnalistaController@administrar');
-
 Route::get('/proveedoresSistema', 'HomeController@index');
 
 //Compras menores
 Route::get('/compras_menores', 'ComprasMenoresController@index');
+Route::get('/compras_menores/show/{compra_id}', 'ComprasMenoresController@show');
+Route::get('/compras_menores/create', 'ComprasMenoresController@create');
+Route::post('/compras_menores', 'ComprasMenoresController@store');
+Route::get('/compras_menores/descargar_archivo/{compra_id}', 'ComprasMenoresController@downloadFile');
+Route::get('/compras_menores/cotizar/{compra_id}', 'ComprasMenoresController@cotizar');
+Route::post('/compras_menores/{compra_id}/agregar_proveedor/{proveedor_id}', 'ComprasMenoresController@agregarProveedorCotizar');
+Route::get('/compra_menor/proveedores_cotizando/{compra_id}', 'ComprasMenoresController@getProveedoresCotizando');
+Route::post('/compra_menor/oferta/{partida_id}', 'ComprasMenoresController@storeOfertaPartida');
+Route::get('/compra_menor/ofertas_proveedor/{compra_id}/{proveedor_id}', 'ComprasMenoresController@getOfertasProveedor');
+Route::get('/compras_menores/{compra_id}/cantidades_autorizadas', 'ComprasMenoresController@showCantidadesAutorizadas');
+Route::post('/compras_menores/{compra_id}/cantidades_autorizadas', 'ComprasMenoresController@storeCantidadesAutorizadas');
+Route::get('/compras_menores/seleccionar_proveedores/{compra_id}', 'ComprasMenoresController@selectProveedores');
+Route::post('/compras_menores/seleccionar_proveedores/{compra_id}', 'ComprasMenoresController@storeSelectedProveedores');
+Route::post('/compras_menores/enviar/{compra_id}', 'ComprasMenoresController@enviarCompraMenor');
+
+
+//Partidas compras menores
+Route::put('/partidas_compras_menores/{partida_id}', 'PartidaCompraMenorController@update');
+Route::delete('/partidas_compras_menores/{partida_id}', 'PartidaCompraMenorController@delete');
 
 //Requisiciones routes
 Route::get('requisiciones/descarga/{requisicion_id}', 'RequisicionesController@descarga');
@@ -101,7 +141,9 @@ Route::get('/reabrirCotizacion/{invitacion}', 'ProveedoresController@reabrirCoti
 Route::post('/cotizacion/{invitacion_id}', 'ProveedoresController@cotizacionAction');
 Route::post('/descargarCotizacionProveedor/{invitacion_id}', 'ProveedoresController@cotizacionFormato');
 Route::get('/cotizacionBlanco/{proveedor_id}', 'ProveedoresController@invitacionBlanco');
+Route::get('/proveedores/compra_menor', 'ProveedoresController@getProveedoresCompraMenor');
 Route::resource('proveedores', 'ProveedoresController');
+
 
 Route::get('/lici/{procedimiento_id}', function ($id) {
     $invitacion = Invitacion::where('procedimiento_id', $id);

@@ -6,6 +6,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>SIMA 2.0</title>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        
         <link href="/css/app.css" rel="stylesheet">
         <meta name="google-site-verification" content="_K2lrUdI8pCClJtVvupYQtOBdwTnP2a6sh5WC6mUd2g">
         @yield('styles')
@@ -23,6 +26,12 @@
     <body>
         <div id="wrap">
             <nav class="navbar navbar-dark bg-dark navbar-siaa navbar-expand-md">
+                <a class="navbar-brand" href="#">
+                    <img src="/images/siaa.png" width="30" height="30" alt="">
+                </a>
+                <a class="navbar-brand" href="#">
+                    <img src="/images/tlaxcala_nuevo.png" width="30" height="30" alt="">
+                </a>
                 <button type="button" class="navbar-toggler collapsed" data-toggle="collapse"
                 data-target="#bs-example-navbar-collapse-1">	<span class="sr-only">Toggle Navigation</span>
 &#x2630;</button>
@@ -64,12 +73,12 @@
                 </ul>
                     </li>
                     <li class="dropdown nav-item"> <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button"
-                        aria-expanded="false">Dependencias <i class="fa fa-building-o"></i><span class="caret"></span></a>
+                        aria-expanded="false">Áreas <i class="fa fa-building-o"></i><span class="caret"></span></a>
                         <ul
                         class="dropdown-menu" role="menu">
                             <li class="dropdown-item"><a href="/dependencias">Listado</a>
                             </li>
-                            <li class="dropdown-item"><a href="/dependencias/create">Crear dependencia</a>
+                            <li class="dropdown-item"><a href="/dependencias/create">Crear área</a>
                             </li>
                             </ul>
                     </li>
@@ -180,9 +189,6 @@
                                 class="dropdown-menu" role="menu">
                                     <li class="dropdown-item"><a href="/programa_anual">Listado</a>
                                     </li>
-                                    <!-- <li><a href="/programa_anual/create">Crear programa anual</a></li>
-
-						            -->
                                     </ul>
                                     </li>
                                     <li class="dropdown nav-item"> <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button"
@@ -192,6 +198,16 @@
                                             <li class="dropdown-item"><a href="/requisiciones">Listado</a>
                                             </li>
                                             <li class="dropdown-item"><a href="/requisiciones/create">Crear requisici&#xF3;n</a>
+                                            </li>
+                                            </ul>
+                                    </li>
+                                    <li class="dropdown nav-item"> <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button"
+                                        aria-expanded="false">Compras Menores <i class="fa fa-file"></i><span class="caret"></span></a>
+                                        <ul
+                                        class="dropdown-menu" role="menu">
+                                            <li class="dropdown-item"><a href="/compras_menores">Listado</a>
+                                            </li>
+                                            <li class="dropdown-item"><a href="/compras_menores/create">Crear compra menor</a>
                                             </li>
                                             </ul>
                                     </li>
@@ -227,7 +243,8 @@
             </nav>
             <br>
             <div class="container mt-5">
-            	@include('flash::message') 
+                @include('flash::message')
+                
         		@yield('content')
         	</div>
     @yield('content2')

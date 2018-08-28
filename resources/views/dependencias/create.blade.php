@@ -4,7 +4,7 @@
     <div class="col-md-10 offset-md-1">
         <div class="card card-default">
             <div class="card-header">
-                <h1>Crear dependencia</h1>
+                <h1>Crear área</h1>
             </div>
             <div class="card-body">
                 {!! Form::open(['url' => 'dependencias']) !!}

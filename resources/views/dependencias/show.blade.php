@@ -1,10 +1,12 @@
 @extends('app')
 @section ('content')
   <div class="main">
-    <div class="row">
-    <h1>{{$dependencia->nombre}}</h1>
-    <h2>Información</h2>
+    <div>
+        <h1>{{$dependencia->nombre}}</h1>
+        <h2>Información</h2>
+    </div>
     <hr>
+    <div class="row">
       <div class="col-md-6">
             <p>Nombre: {{$dependencia->nombre}}</p>
             <p>Calle: {{$dependencia->calle}}</p>
@@ -27,6 +29,7 @@
             <p>Cargo de valida: {{$dependencia->cargo_valida}}</p>
       </div>
     </div>
+    <!--
     <h2>Unidades Administrativas</h2>
     <a href="/unidades_administrativas/{{$dependencia->id}}/create"><button type="button" class="btn btn-primary">Agregar Unidad Administrativa</button></a>
     <hr>
@@ -62,6 +65,7 @@
             </tbody>
         </table>
     </div> 
+    -->
     <h2>Usuarios de {{$dependencia->nombre}}</h2>
     <a href="/usuarios_dependecia/{{$dependencia->id}}/create">
         <button type="button" class="btn btn-primary">Agregar Usuario</button>     
