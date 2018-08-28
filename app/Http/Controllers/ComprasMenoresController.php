@@ -33,6 +33,7 @@ class ComprasMenoresController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $partida = new PartidaCompraMenor([
             'descripcion' => $request->descripcion,
             'cantidad_solicitada' => $request->cantidad_solicitada

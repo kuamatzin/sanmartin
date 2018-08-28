@@ -47809,14 +47809,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit('cerrar');
         },
         guardarPartida: function guardarPartida() {
-            var _this = this;
-
             axios.post('/compras_menores', this.partida).then(function (_ref) {
-                var data = _ref.data;
+                //toastr.success('Partida agregada correctamente')
+                //this.$emit('nueva_partida', data)
+                //this.cerrar()
 
-                toastr.success('Partida agregada correctamente');
-                _this.$emit('nueva_partida', data);
-                _this.cerrar();
+                var data = _ref.data;
             });
         }
     }
