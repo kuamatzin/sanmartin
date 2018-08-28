@@ -19,7 +19,7 @@
                     <th scope="col">Folio</th>
                     <th scope="col">Ver</th>
                     @if(!Auth::user()->isAnalista())
-                    <th scope="col">Cantidades Aprovadas</th>
+                    <th scope="col">Cantidades Aprobadas</th>
                     <th scope="col">Cotizar</th>
                     <th scope="col">Seleccionar Proveedores</th>
                     <th scope="col">Generar archivo</th>
@@ -43,7 +43,7 @@
                         <td>
                             <a href="/compras_menores/{{$compra->id}}/cantidades_autorizadas">
                                 <button class="btn btn-secondary">
-                                    Cantidades Aprovadas
+                                    Cantidades Aprobadas
                                 </button>
                             </a>
                         </td>
