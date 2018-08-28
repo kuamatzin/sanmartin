@@ -47814,7 +47814,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/compras_menores', this.partida).then(function (_ref) {
                 var data = _ref.data;
 
-                oastr.success('Partida agregada correctamente');
+                toastr.success('Partida agregada correctamente');
                 _this.$emit('nueva_partida', data);
                 _this.cerrar();
             });

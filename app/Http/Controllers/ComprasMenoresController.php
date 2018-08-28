@@ -38,8 +38,7 @@ class ComprasMenoresController extends Controller
             'cantidad_solicitada' => $request->cantidad_solicitada
         ]);
 
-
-        if ($request->headers->get('referer') == "https://sanmartin.app/compras_menores/create") {
+        if ($request->headers->get('referer') == ENV("APP_URL") . "/compras_menores/create") {
             $compra_menor = CompraMenor::create([
                 'dependencia_id' => $request->dependencia_id,
                 'fecha' => Carbon::now(),

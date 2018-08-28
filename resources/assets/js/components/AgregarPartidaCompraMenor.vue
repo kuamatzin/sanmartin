@@ -47,7 +47,7 @@
 
             guardarPartida(){
                 axios.post('/compras_menores', this.partida).then(({data}) => {
-                    oastr.success('Partida agregada correctamente')
+                    toastr.success('Partida agregada correctamente')
                     this.$emit('nueva_partida', data)
                     this.cerrar()
                 })
