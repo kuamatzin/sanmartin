@@ -6,11 +6,33 @@ use App\Proveedor;
 use App\Services\ExcelGenerator;
 use App\Services\NumerosLetras;
 use App\Exports\RequisicionExport;
+use App\Dependencia;
 
 Route::get('/test', function(){
-    Excel::load('public/sanmartin/excel/proveedores.xlsx', function($reader) {
+    Excel::load('public/sanmartin/excel/areas.xlsx', function($reader) {
         // Loop through all sheets
         $reader->each(function($sheet) {
+            Dependencia::create([
+                'nombre' => $sheet['nombre'],
+                'calle' => '',
+                'numero_exterior' => '',
+                'numero_interior' => '',
+                'colonia' => '',
+                'municipio' => '',
+                'lada' => '', 
+                'telefono' => '',
+                'extension' => '',
+                'siglas' => '',
+                'autoriza' => '',
+                'titular' => '',
+                'valida' => '',
+                'cargo_autoriza' => '',
+                'cargo_titular' => '',
+                'cargo_valida' => '',
+                'titular' => $sheet['responsable'],
+                'cargo_titular' => $sheet['puesto']
+            ]);
+            /*
             Proveedor::create([
                 'nombre' => $sheet['nombre'],
                 'representante' => $sheet['responsable'],
@@ -19,6 +41,7 @@ Route::get('/test', function(){
                 'status' => 1,
                 'actividad' => $sheet['servicio']
             ]);
+            */
         });
     });
 });
