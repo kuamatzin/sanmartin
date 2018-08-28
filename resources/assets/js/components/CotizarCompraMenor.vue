@@ -91,6 +91,7 @@
                     .then(({
                         data
                     }) => {
+                        this.obtenerProveedoresCotizando()
                         toastr.success('Proveedor agregado correctamente')
                     })
             },

@@ -48410,9 +48410,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         agregarProveedorCompraMenor: function agregarProveedorCompraMenor() {
+            var _this3 = this;
+
             axios.post('/compras_menores/' + this.compra_id + '/agregar_proveedor/' + this.proveedor_agregar).then(function (_ref3) {
                 var data = _ref3.data;
 
+                _this3.obtenerProveedoresCotizando();
                 toastr.success('Proveedor agregado correctamente');
             });
         },
