@@ -21,6 +21,15 @@
 <script>
     export default {
         components: {},
+
+        watch: {
+            proveedor_id(){
+                if (this.oferta == null) {
+                    $('#' + this.index + '_precioUnitario').val('')
+                    $('#' + this.index + '_total').val('')
+                }
+            }
+        },
     
         computed: {
             getPrecioUnitario: function() {

@@ -11,6 +11,17 @@ use App\Exports\RequisicionExport;
 
 class ComprasMenoresController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $compras_menores = CompraMenor::all();
@@ -41,8 +52,7 @@ class ComprasMenoresController extends Controller
         if ($request->headers->get('referer') == "https://sanmartin.reqsiaa.com" . "/compras_menores/create") {
             $compra_menor = CompraMenor::create([
                 'dependencia_id' => $request->dependencia_id,
-                'fecha' => Carbon::now(),
-                'folio' => '123'
+                'fecha' => Carbon::now()
             ]);
 
             $compra_menor->partidas()->save($partida);
@@ -161,5 +171,24 @@ class ComprasMenoresController extends Controller
         }
 
         return view('compras_menores.seleccionar_proveedores', compact('compra', 'updated'));
+    }
+
+    public function eliminarProveedorCompraMenor($compra_id, $proveedor_id)
+    {
+        $compra = CompraMenor::findOrFail($compra_id);
+
+        $compra->ofertas()->where('proveedor_id', $proveedor_id)->delete();
+
+        $compra->proveedores_cotizando()->where('proveedor_id', $proveedor_id)->delete();
+    }
+
+    public function eliminar($compra_id)
+    {
+        $compra = CompraMenor::findOrFail($compra_id);
+        $compra->partidas()->delete();
+        $compra->ofertas()->delete();
+        $compra->proveedores_cotizando()->delete();
+
+        $compra->delete();
     }
 }

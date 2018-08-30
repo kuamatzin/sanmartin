@@ -18,6 +18,7 @@ window.Vue = require('vue');
 Vue.component('compra-menor', require('./components/CompraMenor.vue'));
 Vue.component('crear-compra-menor', require('./components/CrearCompraMenor.vue'));
 Vue.component('cotizar-compra-menor', require('./components/CotizarCompraMenor.vue'));
+Vue.component('eliminar-compra', require('./components/EliminarCompra.vue'));
 
 const app = new Vue({
     el: '#app'

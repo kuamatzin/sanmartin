@@ -17,7 +17,7 @@ class CreateComprasMenoresTable extends Migration
             $table->increments('id');
             $table->integer('dependencia_id')->unsigned();
             $table->date('fecha');
-            $table->string('folio');
+            $table->string('folio')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

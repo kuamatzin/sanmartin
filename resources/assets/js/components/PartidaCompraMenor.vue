@@ -64,6 +64,7 @@
                 axios.delete('/partidas_compras_menores/' + this.partida_actualizar.id)
                 .then(({data}) => {
                     toastr.success('Partida borrada correctamente')
+                    this.$emit('borrar_partida', this.index)
                 })
             }
         }

@@ -2,7 +2,7 @@
     <div>
         <div class="card card-default">
             <div class="card-header">
-                <h1>Cotizar Compra Menor - Folio {{compra.folio}}</h1>
+                <h1>Cotizar Compra Menor - Folio {{compra.id}}</h1>
             </div>
             <div class="card-body">
                 <!-- Agregar Proveedor -->
@@ -21,6 +21,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Proveedor</th>
                             <th scope="col">Ver Cotización</th>
+                            <th scope="col">Eliminar proveedor</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,11 @@
                             <td>
                                 <button class="btn btn-primary" @click="verCotizacionProveedor(proveedor.proveedor)">
                                     Ver cotización
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" @click="confirmarEliminarProveedor(proveedor.proveedor.id, index)">
+                                    Eliminar
                                 </button>
                             </td>
                         </tr>
@@ -45,6 +51,7 @@
 
 
 <script>
+    import swal from 'sweetalert2'
     import AgregarCotizacionProveedor from './AgregarCotizacionProveedor.vue'
     
     export default {
@@ -61,7 +68,7 @@
     
         data() {
             return {
-                proveedor_agregar: 1,
+                proveedor_agregar: 122,
                 agregar_cotizacion: false,
                 proveedores: [],
                 proveedores_cotizando: [],
@@ -79,6 +86,7 @@
             },
     
             obtenerProveedoresCotizando() {
+                console.log("EUEU")
                 axios.get('/compra_menor/proveedores_cotizando/' + this.compra_id).then(({
                     data
                 }) => {
@@ -101,9 +109,30 @@
                 this.agregar_cotizacion = true
             },
     
-            agregarCotizacion() {
-    
+            confirmarEliminarProveedor(proveedor_id, index){
+                swal({
+                    title: '¿Estás seguro de eliminar al proveedor?',
+                    text: "Se borraran los datos de cotización",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Estoy seguro',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.value) {
+                        this.eliminarProveedor(proveedor_id, index)
+                    }
+                })
             },
+
+            eliminarProveedor(proveedor_id, index){
+                let that = this
+                axios.post('/compras_menores/eliminar_proveedor/' + this.compra_id + '/' + proveedor_id).then((data) => {
+                    toastr.success('Proveedor eliminado correctamente')
+                    that.proveedores_cotizando.splice(index, 1)
+                })
+            }
         }
     }
 </script>

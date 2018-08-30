@@ -6,7 +6,7 @@
     <br><br>
     <div class="card">
         <div class="card-header">
-            <h1>Compra Folio: {{$compra->folio}}</h1>
+            <h1>Compra Folio: {{$compra->id}}</h1>
         </div>
         <div class="card-body">
             <table class="table">

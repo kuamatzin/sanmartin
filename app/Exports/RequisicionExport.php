@@ -15,11 +15,11 @@ class RequisicionExport
             $that = (new self);
             $that->sheet = $reader->setActiveSheetIndex(0);
 
-            $that->setDependencia('MUNICIPIO DE SAN MARTIN TEXMELUCAN, PUEBLA TEST');
+            $that->setDependencia('MUNICIPIO DE SAN MARTIN TEXMELUCAN, PUEBLA');
             $that->setDependenciaSolicitante($requisicion->dependencia->nombre);
-            $that->setTelefono('109 53 00 EXT. 142 -143 TEST');
+            $that->setTelefono('109 53 00 EXT. 142 -143');
             $that->setFecha($requisicion->fecha);
-            $that->setFolioRecepcion($requisicion->folio);
+            //$that->setFolioRecepcion($requisicion->id);
             $that->setPartidas($requisicion->partidas);
             $that->setProveedores($requisicion);
         })->export('xlsx');

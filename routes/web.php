@@ -8,10 +8,10 @@ use App\Services\NumerosLetras;
 use App\Exports\RequisicionExport;
 use App\Dependencia;
 
-Route::get('/test', function(){
-    Excel::load('public/sanmartin/excel/areas.xlsx', function($reader) {
+Route::get('/test', function () {
+    Excel::load('public/sanmartin/excel/areas.xlsx', function ($reader) {
         // Loop through all sheets
-        $reader->each(function($sheet) {
+        $reader->each(function ($sheet) {
             Dependencia::create([
                 'nombre' => $sheet['nombre'],
                 'calle' => '',
@@ -19,7 +19,7 @@ Route::get('/test', function(){
                 'numero_interior' => '',
                 'colonia' => '',
                 'municipio' => '',
-                'lada' => '', 
+                'lada' => '',
                 'telefono' => '',
                 'extension' => '',
                 'siglas' => '',
@@ -107,6 +107,9 @@ Route::post('/compras_menores/{compra_id}/cantidades_autorizadas', 'ComprasMenor
 Route::get('/compras_menores/seleccionar_proveedores/{compra_id}', 'ComprasMenoresController@selectProveedores');
 Route::post('/compras_menores/seleccionar_proveedores/{compra_id}', 'ComprasMenoresController@storeSelectedProveedores');
 Route::post('/compras_menores/enviar/{compra_id}', 'ComprasMenoresController@enviarCompraMenor');
+Route::post('/compras_menores/eliminar_proveedor/{compra_id}/{proveedor_id}', 'ComprasMenoresController@eliminarProveedorCompraMenor');
+Route::delete('/compras_menores/{compra_id}', 'ComprasMenoresController@eliminar');
+
 
 
 //Partidas compras menores

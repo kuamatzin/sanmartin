@@ -26,6 +26,12 @@
         components: {
         },
 
+        watch: {
+            dependenciaId(value) {
+                this.partida.dependencia_id = value
+            }
+        },
+
         props: ['dependenciaId'],
 
         data() {
@@ -41,7 +47,7 @@
         methods: {
             cerrar(){
                 this.partida.descripcion = ''
-                this.partida.cantidad = ''
+                this.partida.cantidad_solicitada = ''
                 this.$emit('cerrar')
             },
 
