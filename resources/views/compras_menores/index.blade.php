@@ -39,35 +39,37 @@
                             </a>
                         </td>
                         <td>
-                            <a href="/compras_menores/{{$compra->id}}/cantidades_autorizadas">
-                                <button class="btn btn-secondary">
+                            <a @if(Auth::user()->isAnalista() == false) href="/compras_menores/{{$compra->id}}/cantidades_autorizadas" @endif>
+                                <button class="btn btn-secondary @if(Auth::user()->isAnalista()) disabled @endif">
                                     Cantidades Aprobadas
                                 </button>
                             </a>
                         </td>
                         <td>
-                            <a href="/compras_menores/cotizar/{{$compra->id}}">
-                                <button class="btn btn-info">
+                            <a @if(Auth::user()->isAnalista() == false) href="/compras_menores/cotizar/{{$compra->id}}" @endif>
+                                <button class="btn btn-info @if(Auth::user()->isAnalista()) disabled @endif">
                                     Cotizar
                                 </button>
                             </a>
                         </td>  
                         <td>
-                            <a href="/compras_menores/seleccionar_proveedores/{{$compra->id}}">
-                                <button class="btn btn-warning">
+                            <a @if(Auth::user()->isAnalista() == false) href="/compras_menores/seleccionar_proveedores/{{$compra->id}}" @endif>
+                                <button class="btn btn-warning @if(Auth::user()->isAnalista()) disabled @endif">
                                     Seleccionar Proveedores
                                 </button>
                             </a>
                         </td> 
                         <td>
-                            <a href="/compras_menores/descargar_archivo/{{$compra->id}}">
-                                <button class="btn btn-success">
+                            <a @if(Auth::user()->isAnalista() == false) href="/compras_menores/descargar_archivo/{{$compra->id}}" @endif>
+                                <button class="btn btn-success @if(Auth::user()->isAnalista()) disabled @endif">
                                     Descargar archivo
                                 </button>
                             </a>
                         </td>
                         <td>
+                            @if(Auth::user()->isAnalista() == false)
                             <eliminar-compra :compra_id="{{$compra->id}}"></eliminar-compra>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
