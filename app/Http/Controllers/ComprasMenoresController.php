@@ -45,7 +45,13 @@ class ComprasMenoresController extends Controller
 
     public function create()
     {
-        $dependencias = Dependencia::select('nombre', 'id')->get();
+        if (Auth::user()->isAnalista()) {
+            $dependencias = Dependencia::select('nombre', 'id')->where('id', Auth::user()->dependencia_id)->get();
+        } elseif (Auth::user()->isAnalistaUnidad()) {
+            $dependencias = Dependencia::select('nombre', 'id')->where('id', Auth::user()->dependencia_id)->get();
+        } else {
+            $dependencias = Dependencia::select('nombre', 'id')->get();
+        }
 
         return view('compras_menores.create', compact('dependencias'));
     }
