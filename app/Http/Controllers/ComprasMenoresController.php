@@ -8,6 +8,7 @@ use App\CompraMenor;
 use App\Dependencia;
 use App\PartidaCompraMenor;
 use App\Exports\RequisicionExport;
+use Auth;
 
 class ComprasMenoresController extends Controller
 {
@@ -24,7 +25,14 @@ class ComprasMenoresController extends Controller
 
     public function index()
     {
-        $compras_menores = CompraMenor::all();
+        if (Auth::user()->isAnalista()) {
+            $compras_menores = CompraMenor::where('dependencia_id', Auth::user()->dependencia_id)->get();
+        } elseif (Auth::user()->isAnalistaUnidad()) {
+            $compras_menores = CompraMenor::where('unidad_administrativa_id', Auth::user()->unidad_administrativa_id)->get();
+        } else {
+            $compras_menores = CompraMenor::all();
+        }
+        
         return view('compras_menores.index', compact('compras_menores'));
     }
 
